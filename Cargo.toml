@@ -9,6 +9,7 @@ version = "0.1.0"
 [dependencies]
 anyhow = "1"
 daemonize = "0.4.1"
+notify-rust = "4"
 num_cpus = "1.13.0"
 structopt = "0.3.17"
 sysinfo = "0.15.1"

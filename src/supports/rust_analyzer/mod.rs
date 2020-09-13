@@ -2,6 +2,8 @@ use anyhow::{Context, Error};
 use std::collections::HashMap;
 use sysinfo::{Pid, Process, ProcessExt, Signal, System, SystemExt};
 
+use crate::util::notify_kill;
+
 fn pid_of_rust_analyzer(processes: &HashMap<Pid, Process>) -> Result<Vec<(&Pid, &Process)>, Error> {
     let mut ret = vec![];
     for (pid, v) in processes {
@@ -44,7 +46,7 @@ fn kill_rustc_if_required(processes: &HashMap<Pid, Process>, parent: Pid) -> Res
     for i in 0..(rustc_processes.len() - cpu_count * 2) {
         let p = rustc_processes[i];
         p.kill(Signal::Interrupt);
-        eprintln!("Killed rustc process {}", p.pid())
+        notify_kill("rust-analyzer spawned too many rustc").context("failed to notify")?;
     }
 
     Ok(())

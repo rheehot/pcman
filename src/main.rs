@@ -1,5 +1,4 @@
-use anyhow::{bail, Error};
-use daemonize::Daemonize;
+use anyhow::Error;
 use sysinfo::{System, SystemExt};
 
 mod stat;
@@ -9,18 +8,19 @@ mod util;
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     let system = System::new_all();
+
     supports::rust_analyzer::kill_if_required(&system)?;
 
-    let daemonize = Daemonize::new()
-        .pid_file("/tmp/pcman.pid")
-        .chown_pid_file(true)
-        .working_directory("/tmp")
-        .exit_action(|| eprintln!("Terminating..."));
+    // let daemonize = Daemonize::new()
+    //     .pid_file("/tmp/pcman.pid")
+    //     .chown_pid_file(true)
+    //     .working_directory("/tmp")
+    //     .exit_action(|| eprintln!("Terminating..."));
 
-    match daemonize.start() {
-        Ok(_) => println!("Success, daemonized"),
-        Err(e) => bail!("Error, {}", e),
-    }
+    // match daemonize.start() {
+    //     Ok(_) => println!("Success, daemonized"),
+    //     Err(e) => bail!("Error, {}", e),
+    // }
 
     Ok(())
 }
