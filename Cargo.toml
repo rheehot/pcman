@@ -7,5 +7,10 @@ version = "0.1.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = "1"
+daemonize = "0.4.1"
+num_cpus = "1.13.0"
 structopt = "0.3.17"
+sysinfo = "0.15.1"
 systemstat = "0.1.5"
+tokio = {version = "0.2.22", features = ["full"]}

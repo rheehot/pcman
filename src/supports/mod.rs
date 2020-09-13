@@ -1,4 +1,4 @@
 //! Supprots for programs I use.
 
-mod cargo;
-mod rust_analyzer;
+pub mod cargo;
+pub mod rust_analyzer;
