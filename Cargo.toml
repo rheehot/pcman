@@ -15,6 +15,4 @@ structopt = "0.3.17"
 sysinfo = "0.15.1"
 systemstat = "0.1.5"
 tokio = {version = "0.2.22", features = ["full"]}
-
-[target.'cfg(target_os = "macos")'.dependencies]
-sysbar = "0.2.0"
+tray-item = "0.4.0-alpha"

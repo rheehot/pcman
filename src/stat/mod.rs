@@ -1,25 +1,14 @@
 use anyhow::Error;
+use tray_item::TrayItem;
 
-#[cfg(not(target_os = "macos"))]
 pub fn init_tray() -> Result<(), Error> {
-    Ok(())
-}
+    let mut tray = TrayItem::new("pcman", "").unwrap();
 
-#[cfg(target_os = "macos")]
-pub fn init_tray() -> Result<(), Error> {
-    use sysbar::Sysbar;
-    let mut bar = Sysbar::new("pcman");
+    tray.add_menu_item("Run now", || {}).unwrap();
 
-    bar.add_item(
-        "Say 'bar'",
-        Box::new(move || {
-            println!("bar");
-        }),
-    );
-
-    bar.add_quit_item("Quit");
-
-    bar.display();
+    let inner = tray.inner_mut();
+    inner.add_quit_item("Quit");
+    inner.display();
 
     Ok(())
 }

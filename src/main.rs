@@ -1,5 +1,4 @@
-use anyhow::{bail, Context, Error};
-use daemonize::Daemonize;
+use anyhow::{Context, Error};
 use sysinfo::{System, SystemExt};
 
 mod stat;
